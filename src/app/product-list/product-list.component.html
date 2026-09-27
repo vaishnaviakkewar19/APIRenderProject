@@ -1,0 +1,24 @@
+<div class="product-container">
+  <h1>Products</h1>
+
+  @if (loading()) {
+    <p class="status">Loading products...</p>
+  } @else if (error()) {
+    <p class="status error">{{ error() }}</p>
+  } @else {
+    <div class="product-grid">
+      @for (product of products(); track product.id) {
+        <div class="product-card">
+          <img [src]="product.thumbnail" [alt]="product.title" />
+          <h3>{{ product.title }}</h3>
+          <p class="category">{{ product.category }}</p>
+          <p class="description">{{ product.description }}</p>
+          <div class="footer">
+            <span class="price">{{ product.price | currency }}</span>
+            <span class="rating">⭐ {{ product.rating }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

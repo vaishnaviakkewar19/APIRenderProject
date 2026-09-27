@@ -1,0 +1,22 @@
+<nav class="category-menu">
+  @if (loading()) {
+    <p class="status">Loading categories...</p>
+  } @else if (error()) {
+    <p class="status error">{{ error() }}</p>
+  } @else {
+    <button
+      class="category-chip"
+      [class.active]="productService.selectedcategory() === null"
+      (click)="select(null)">
+      All
+    </button>
+    @for (cat of categories(); track cat.slug) {
+      <button
+        class="category-chip"
+        [class.active]="productService.selectedcategory() === cat.slug"
+        (click)="select(cat.slug)">
+        {{ cat.name }}
+      </button>
+    }
+  }
+</nav>
